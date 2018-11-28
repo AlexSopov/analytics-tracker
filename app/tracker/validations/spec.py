@@ -1,5 +1,4 @@
 from app.libs.validations.validation_rules import required, of_type, of_len
-from app.libs.validations.validators import validate
 
 
 def track_schema():

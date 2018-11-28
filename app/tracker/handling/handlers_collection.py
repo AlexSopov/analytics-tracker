@@ -1,5 +1,3 @@
-from werkzeug.exceptions import BadRequest
-
 from app.tracker.handling.handlers import ClickHandlerStrategy, PurchaseHandlerStrategy
 
 strategies_map = {

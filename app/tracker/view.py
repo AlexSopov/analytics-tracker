@@ -1,7 +1,8 @@
-from flask import Blueprint, request, Request, g
+from flask import Blueprint, request, g
 
 from app.tracker.handling import request_handler
 from app.tracker.validations.wrappers import project_exists, track_schema_valid
+
 
 track_blueprint = Blueprint('track', __name__)
 
