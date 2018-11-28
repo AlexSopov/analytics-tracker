@@ -2,6 +2,7 @@ from flask import Blueprint, request, Request
 from werkzeug.exceptions import BadRequest
 
 from app.lib.response.response import no_content
+from app.tracker.handlers import request_handler
 from app.tracker.validations.validate import project_exists, validate_track_post_body
 
 track_blueprint = Blueprint('track', __name__)
@@ -15,7 +16,7 @@ def track(project):
     if not validate_track_post_body(post_body):
         raise BadRequest()
 
-    return no_content()
+    return request_handler.handle_request(post_body)
 
 
 def on_json_loading_failed(self, e):
