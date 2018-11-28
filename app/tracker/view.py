@@ -1,8 +1,7 @@
 from flask import Blueprint, request, Request
 from werkzeug.exceptions import BadRequest
 
-from app.lib.response.response import no_content
-from app.tracker.handlers import request_handler
+from app.tracker.handling import request_handler
 from app.tracker.validations.validate import project_exists, validate_track_post_body
 
 track_blueprint = Blueprint('track', __name__)

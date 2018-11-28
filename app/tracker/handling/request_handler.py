@@ -1,7 +1,7 @@
 from werkzeug.exceptions import BadRequest
 
 from app.lib.response.response import no_content
-from app.tracker.handlers import handlers_collection
+from app.tracker.handling import handlers_collection
 
 
 def handle(request_body, project):

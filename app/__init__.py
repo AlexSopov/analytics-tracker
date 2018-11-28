@@ -14,4 +14,4 @@ migrate = Migrate(app, db)
 from app.tracker.view import track_blueprint
 app.register_blueprint(track_blueprint, url_prefix='/')
 
-from app.tracker.models import click_event, event_base, project, purchase_event
+from app.tracker.models import data_models

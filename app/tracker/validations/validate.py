@@ -2,8 +2,8 @@ import functools
 
 from werkzeug.exceptions import BadRequest
 
-from app.tracker.models.project import Project
-from app.tracker.validations.schema import required, of_type, is_valid
+from app.tracker.models.data_models import Project
+from app.lib.validations.schema import required, of_type, is_valid
 
 
 def project_exists(func):
