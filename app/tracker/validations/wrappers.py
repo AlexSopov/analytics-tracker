@@ -10,6 +10,12 @@ from app.tracker.validations.schema import track_schema
 
 
 def track_schema_valid(func):
+    """
+    Checks if format of post request for /track endpoint is valid.
+    :param func: Function to be wrapped
+    :return: Wrapped function executing result if data is valid, otherwise
+    raises BadRequest.
+    """
     schema = track_schema()
 
     @functools.wraps(func)
@@ -24,8 +30,8 @@ def track_schema_valid(func):
 
 def project_exists(func):
     """
-    Checks if requested project existst.
-    :param func:
+    Checks if requested project exist.
+    :param func: Function to be wrapped
     :return: Result of validating if project exists.
     """
 

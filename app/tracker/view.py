@@ -14,9 +14,10 @@ def track(project):
     """
     Handles /track/<project> request. Validates data and inserts appropriate
     record to database.
+
     :param project: Project for which event is executed. Must exist in database.
     :return: 204 - no content on success
-    400 - On not valid request body or project doesn't exist
+    400 - On not valid request body or if project doesn't exist
     """
     post_body = request.get_json()
 
