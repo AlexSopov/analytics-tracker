@@ -1,11 +1,10 @@
 import functools
 
 from flask import request, g
-from werkzeug.exceptions import BadRequest
 
 from app import db
-from app.lib.errors.common_errors import NonexistentProjectBadRequest
-from app.lib.validations.validators import is_valid
+from app.libs.errors.common_errors import NonexistentProjectBadRequest
+from app.libs.validations.validators import validate
 from app.tracker.models.data_models import Project
 from app.tracker.validations.schema import track_schema
 
@@ -21,10 +20,8 @@ def track_schema_valid(func):
 
     @functools.wraps(func)
     def wrapper_track_schema_valid(*args, **kwargs):
-        if is_valid(schema, request.get_json()):
-            return func(*args, **kwargs)
-
-        raise BadRequest()
+        validate(schema, request.get_json())
+        return func(*args, **kwargs)
 
     return wrapper_track_schema_valid
 
@@ -62,10 +59,8 @@ def validate_data(schema):
 
         @functools.wraps(func)
         def wrapped(self, request_body, project):
-            if is_valid(schema, request_body['data']):
-                return func(self, request_body, project)
-
-            raise BadRequest()
+            validate(schema, request_body['data'])
+            return func(self, request_body, project)
 
         return wrapped
 

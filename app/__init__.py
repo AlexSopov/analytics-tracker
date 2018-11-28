@@ -1,7 +1,7 @@
 import os
 from flask import Flask, Request
 
-from app.lib.errors.common_errors import JSONLoadingBadRequest
+from app.libs.errors.common_errors import JSONLoadingBadRequest
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
