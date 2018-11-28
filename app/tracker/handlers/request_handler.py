@@ -4,7 +4,7 @@ from app.lib.response.response import no_content
 from app.tracker.handlers import handlers_collection
 
 
-def handle_request(request_body):
+def handle(request_body, project):
     handler_strategy = handlers_collection.get_strategy(request_body)
 
     if handler_strategy is not None:

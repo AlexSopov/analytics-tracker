@@ -16,7 +16,7 @@ def track(project):
     if not validate_track_post_body(post_body):
         raise BadRequest()
 
-    return request_handler.handle_request(post_body)
+    return request_handler.handle(post_body, project)
 
 
 def on_json_loading_failed(self, e):
