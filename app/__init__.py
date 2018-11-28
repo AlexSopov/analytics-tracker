@@ -1,5 +1,7 @@
 import os
-from flask import Flask
+from flask import Flask, Request
+
+from app.lib.errors.common_errors import JSONLoadingBadRequest
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -15,3 +17,10 @@ from app.tracker.view import track_blueprint
 app.register_blueprint(track_blueprint, url_prefix='/')
 
 from app.tracker.models import data_models
+
+
+def on_json_loading_failed(self, e):
+    raise JSONLoadingBadRequest(e)
+
+
+Request.on_json_loading_failed = on_json_loading_failed

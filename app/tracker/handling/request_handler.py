@@ -1,5 +1,4 @@
-from werkzeug.exceptions import BadRequest
-
+from app.lib.errors.common_errors import NotSupportedEventTypeBadRequest
 from app.tracker.handling import handlers_collection
 
 
@@ -17,5 +16,4 @@ def handle(request_body, project):
     if handler_strategy is not None:
         return handler_strategy.handle(request_body, project)
 
-    raise BadRequest('Event type {type} is not supported'
-                     .format(type=request_body.get('event')))
+    raise NotSupportedEventTypeBadRequest(request_body.get('event'))
