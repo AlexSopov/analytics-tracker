@@ -1,6 +1,6 @@
 import functools
 
-from flask import request
+from flask import request, g
 from werkzeug.exceptions import BadRequest
 
 from app import db
@@ -32,6 +32,7 @@ def project_exists(func):
         if project_data is None:
             raise BadRequest("Project \"{0}\" doesn't exist.".format(project_name))
 
+        g.project = project_data
         return func(*args, **kwargs)
 
     return wrapper_project_exists

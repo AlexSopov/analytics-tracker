@@ -1,4 +1,4 @@
-from flask import Blueprint, request, Request
+from flask import Blueprint, request, Request, g
 from werkzeug.exceptions import BadRequest
 
 from app.tracker.handling import request_handler
@@ -13,7 +13,7 @@ track_blueprint = Blueprint('track', __name__)
 def track(project):
     post_body = request.get_json()
 
-    return request_handler.handle(post_body, project)
+    return request_handler.handle(post_body, g.project)
 
 
 def on_json_loading_failed(e):
