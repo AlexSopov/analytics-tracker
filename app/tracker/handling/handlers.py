@@ -7,7 +7,13 @@ from app.tracker.validations.schema import click_data_schema, purchase_data_sche
 from app.tracker.validations.wrappers import validate_data
 
 
-class HandlerBase(ABC):
+class HandlerStrategyBase(ABC):
+
+    """Base class for handling requests of specific event_type.
+    Validates data from post body and creates appropriate record
+    in database.
+    """
+
     request_body_data = ''
 
     @abstractmethod
@@ -19,7 +25,8 @@ class HandlerBase(ABC):
         return self.request_body_data[attribute]
 
 
-class ClickHandler(HandlerBase):
+class ClickHandlerStrategy(HandlerStrategyBase):
+
     @validate_data(click_data_schema())
     def handle(self, request_body, project):
         super().handle(request_body, project)
@@ -32,12 +39,13 @@ class ClickHandler(HandlerBase):
         return no_content()
 
 
-class PurchaseHandler(HandlerBase):
+class PurchaseHandlerStrategy(HandlerStrategyBase):
+
     @validate_data(purchase_data_schema())
     def handle(self, request_body, project):
         super().handle(request_body, project)
 
-        db.session.add(ClickEvent(project, request_body['customer_id']))
+        db.session.add(ClickEvent(project, self.get_data_attribute('customer_id')))
         db.session.commit()
 
         return no_content()

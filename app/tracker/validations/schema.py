@@ -1,4 +1,4 @@
-from app.lib.validations.validation_rules import required, of_type
+from app.lib.validations.validation_rules import required, of_type, of_len
 from app.lib.validations.validators import is_valid
 
 
@@ -11,7 +11,7 @@ def track_schema():
 
 def click_data_schema():
     return {
-        'track_id': [required, of_type(str)],
+        'track_id': [required, of_type(str), of_len(5, 15)],
     }
 
 

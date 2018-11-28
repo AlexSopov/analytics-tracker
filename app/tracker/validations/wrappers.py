@@ -23,6 +23,11 @@ def track_schema_valid(func):
 
 
 def project_exists(func):
+    """
+    Checks if requested project existst.
+    :param func:
+    :return: Result of validating if project exists.
+    """
 
     @functools.wraps(func)
     def wrapper_project_exists(*args, **kwargs):
@@ -39,6 +44,12 @@ def project_exists(func):
 
 
 def validate_data(schema):
+    """
+    Validates that request's 'data' specifies appropriate schema.
+    :param schema: Expected schema. The schema for which request_body is compared.
+    :return: Wrapped function executing result if data is valid, otherwise
+    raises BadRequest.
+    """
 
     def wrapper_validate_schema(func):
 
