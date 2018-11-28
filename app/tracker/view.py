@@ -2,23 +2,21 @@ from flask import Blueprint, request, Request
 from werkzeug.exceptions import BadRequest
 
 from app.tracker.handling import request_handler
-from app.tracker.validations.validate import project_exists, validate_track_post_body
+from app.tracker.validations.wrappers import project_exists, track_schema_valid
 
 track_blueprint = Blueprint('track', __name__)
 
 
 @track_blueprint.route("/track/<string:project>", methods=['POST'])
+@track_schema_valid
 @project_exists
 def track(project):
     post_body = request.get_json()
 
-    if not validate_track_post_body(post_body):
-        raise BadRequest()
-
     return request_handler.handle(post_body, project)
 
 
-def on_json_loading_failed(self, e):
+def on_json_loading_failed(e):
     raise BadRequest('Failed to decode JSON object: {0}'.format(e))
 
 
