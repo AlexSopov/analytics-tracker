@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from app import db
 from app.libs.response.response import no_content
 from app.tracker.models.data_models import ClickEvent
-from app.tracker.validations.schema import click_data_schema, purchase_data_schema
+from app.tracker.validations.spec import click_data_schema, purchase_data_schema
 from app.tracker.validations.wrappers import validate_data
 
 

@@ -1,5 +1,6 @@
 from app.tracker.handling.handlers import ClickHandlerStrategy, PurchaseHandlerStrategy
 
+
 strategies_map = {
     'click': ClickHandlerStrategy(),
     'purchase': PurchaseHandlerStrategy()

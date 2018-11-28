@@ -6,7 +6,7 @@ from app import db
 from app.libs.errors.common_errors import NonexistentProjectBadRequest
 from app.libs.validations.validators import validate
 from app.tracker.models.data_models import Project
-from app.tracker.validations.schema import track_schema
+from app.tracker.validations.spec import track_schema
 
 
 def track_schema_valid(func):
