@@ -1,15 +1,15 @@
 from flask import Blueprint, request, g
 
 from app.tracker.handling import request_handler
-from app.tracker.validations.wrappers import project_exists, track_schema_valid
+from app.tracker.validations.wrappers import validate_project_exists, validate_track_schema
 
 
 track_blueprint = Blueprint('track', __name__)
 
 
 @track_blueprint.route("/track/<string:project>", methods=['POST'])
-@project_exists
-@track_schema_valid
+@validate_project_exists
+@validate_track_schema
 def track(project):
     """
     Handles '/track/<project>' request. Validates data and inserts appropriate
@@ -22,4 +22,3 @@ def track(project):
     post_body = request.get_json()
 
     return request_handler.handle(post_body, g.project)
-

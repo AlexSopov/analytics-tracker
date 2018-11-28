@@ -9,7 +9,7 @@ from app.tracker.models.data_models import Project
 from app.tracker.validations.spec import track_schema
 
 
-def track_schema_valid(func):
+def validate_track_schema(func):
     """
     Checks if format of post request for /track endpoint is valid.
     :param func: Function to be wrapped
@@ -19,14 +19,14 @@ def track_schema_valid(func):
     schema = track_schema()
 
     @functools.wraps(func)
-    def wrapper_track_schema_valid(*args, **kwargs):
+    def wrapper_validate_track_schema(*args, **kwargs):
         validate(schema, request.get_json())
         return func(*args, **kwargs)
 
-    return wrapper_track_schema_valid
+    return wrapper_validate_track_schema
 
 
-def project_exists(func):
+def validate_project_exists(func):
     """
     Checks if requested project exist.
     :param func: Function to be wrapped
@@ -34,7 +34,7 @@ def project_exists(func):
     """
 
     @functools.wraps(func)
-    def wrapper_project_exists(*args, **kwargs):
+    def wrapper_validate_project_exists(*args, **kwargs):
         project_name = kwargs.get('project')
         project_data = db.session.query(Project).get(project_name)
 
@@ -44,7 +44,7 @@ def project_exists(func):
         g.project = project_data
         return func(*args, **kwargs)
 
-    return wrapper_project_exists
+    return wrapper_validate_project_exists
 
 
 def validate_data(schema):
