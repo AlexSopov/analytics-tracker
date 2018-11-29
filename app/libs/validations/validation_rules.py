@@ -1,4 +1,4 @@
-from app.libs.errors.validation_errors import RequiredPropertyNotFountBadRequest, InvalidPropertyTypeBadRequest, \
+from app.libs.errors.validation_errors import RequiredPropertyNotFoundBadRequest, InvalidPropertyTypeBadRequest, \
     UnexpectedPropertyLenBadRequest
 
 
@@ -6,7 +6,7 @@ def required(data, property_name):
     if data is not None:
         return
 
-    raise RequiredPropertyNotFountBadRequest(property_name)
+    raise RequiredPropertyNotFoundBadRequest(property_name)
 
 
 def of_type(expected_type):

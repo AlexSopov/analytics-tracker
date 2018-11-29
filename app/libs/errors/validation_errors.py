@@ -1,35 +1,36 @@
-from werkzeug.exceptions import BadRequest
+from app.libs.errors.common_errors import InvalidUsage
+from app.libs.errors.error_code import ErrorCode
 
 
-class RequiredPropertyNotFountBadRequest(BadRequest):
+class RequiredPropertyNotFoundBadRequest(InvalidUsage):
     def __init__(self, property_name):
-        description = 'Required requests property "{property}" not found.'\
+        message = 'Required requests property "{property}" not found.'\
             .format(property=property_name)
 
-        super().__init__(description)
+        super().__init__(message, ErrorCode.REQUIRED_PROPERTY_NOT_FOUND)
         
 
-class InvalidPropertyTypeBadRequest(BadRequest):
+class InvalidPropertyTypeBadRequest(InvalidUsage):
     def __init__(self, property_name, expected_type, found_type):
-        description = 'Invalid type of property "{property}". ' \
-                      'Expected \"{expected}\", but found \"{found}\"'\
+        message = 'Invalid type of property "{property}". ' \
+                      'Expected "{expected}", but found "{found}"'\
             .format(property=property_name, expected=expected_type, found=found_type)
 
-        super().__init__(description)
+        super().__init__(message, ErrorCode.INVALID_PROPERTY_TYPE)
 
 
-class UnexpectedPropertyLenBadRequest(BadRequest):
+class UnexpectedPropertyLenBadRequest(InvalidUsage):
     def __init__(self, property_name, expected_len, found_len):
-        description = 'Unexpected length of property "{property}". ' \
+        message = 'Unexpected length of property "{property}". ' \
                       'Expected "{expected}", but found "{found}"'\
             .format(property=property_name, expected=expected_len, found=found_len)
 
-        super().__init__(description)
+        super().__init__(message, ErrorCode.UNEXPECTED_PROPERTY_LEN)
 
 
-class UnexpectedPropertyBadRequest(BadRequest):
+class UnexpectedPropertyBadRequest(InvalidUsage):
     def __init__(self, property_name):
-        description = 'Property "{property}" is not supported.' \
+        message = 'Property "{property}" is not supported.' \
             .format(property=property_name)
 
-        super().__init__(description)
+        super().__init__(message, ErrorCode.UNEXPECTED_PROPERTY)
