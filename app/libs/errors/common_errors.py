@@ -38,11 +38,11 @@ class JSONLoadingBadRequest(InvalidUsage):
 
 class NonexistentProjectBadRequest(InvalidUsage):
     def __init__(self, project):
-        message = "Project \"{project}\" doesn't exist.".format(project=project)
+        message = 'Project "{project}" does not exist.'.format(project=project)
         super().__init__(message, ErrorCode.PROJECT_DOES_NOT_EXIST)
 
 
 class NotSupportedEventTypeBadRequest(InvalidUsage):
     def __init__(self, event_type):
-        message = 'Event type {type} is not supported'.format(type=event_type)
+        message = 'Event type "{type}" is not supported'.format(type=event_type)
         super().__init__(message, ErrorCode.NOT_SUPPORTED_EVENT_TYPE)
