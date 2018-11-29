@@ -2,11 +2,9 @@ from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
+from app import db
 
-Base = declarative_base()
-
-
-class Project(Base):
+class Project(db.Model):
     __tablename__ = 'project'
     name = Column(String(120), primary_key=True)
 
@@ -17,7 +15,7 @@ class Project(Base):
         return '<Project: {name}>'.format(name=self.name)
 
 
-class EventBase(Base):
+class EventBase(db.Model):
     __tablename__ = 'event'
     id = Column(Integer, primary_key=True)
     project_name = Column(String, ForeignKey('project.name'), nullable=False)
