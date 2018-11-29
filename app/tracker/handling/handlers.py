@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from app import db
 from app.libs.response.response import no_content
-from app.tracker.models.data_models import ClickEvent
+from app.tracker.models.data_models import ClickEvent, PurchaseEvent
 from app.tracker.validations.spec import click_data_schema, purchase_data_schema
 from app.tracker.validations.wrappers import validate_data
 
@@ -45,7 +45,7 @@ class PurchaseHandlerStrategy(HandlerStrategyBase):
     def handle(self, request_body, project):
         super().handle(request_body, project)
 
-        db.session.add(ClickEvent(project, self.get_data_attribute('customer_id')))
+        db.session.add(PurchaseEvent(project, self.get_data_attribute('customer_id')))
         db.session.commit()
 
         return no_content()

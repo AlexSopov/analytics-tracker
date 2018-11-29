@@ -1,4 +1,4 @@
-from app.libs.validations.validation_rules import required, of_type, of_len
+from app.libs.validations.validation_rules import required, of_type, of_len, of_range
 
 
 def track_schema():
@@ -16,5 +16,5 @@ def click_data_schema():
 
 def purchase_data_schema():
     return {
-        'customer_id': [required, of_type(int)],
+        'customer_id': [required, of_type(int), of_range(1, 10000000000)],
     }

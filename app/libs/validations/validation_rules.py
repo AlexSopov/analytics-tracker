@@ -1,5 +1,5 @@
 from app.libs.errors.validation_errors import RequiredPropertyNotFoundBadRequest, InvalidPropertyTypeBadRequest, \
-    UnexpectedPropertyLenBadRequest
+    UnexpectedPropertyLenBadRequest, UnexpectedPropertyValueBadRequest
 
 
 def required(data, property_name):
@@ -27,3 +27,14 @@ def of_len(min_len, max_len):
         raise UnexpectedPropertyLenBadRequest(property_name, (min_len, max_len), len(data))
 
     return len_validator
+
+
+def of_range(min_val, max_val):
+    def val_validator(data, property_name):
+        if min_val <= data <= max_val:
+            return
+
+        raise UnexpectedPropertyValueBadRequest(property_name, (min_val, max_val), data)
+
+    return val_validator
+
