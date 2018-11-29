@@ -1,16 +1,15 @@
 import os
 from flask import Flask, Request
-from flask.json import jsonify
-from werkzeug.exceptions import BadRequest
 
 from app.libs.errors.common_errors import JSONLoadingBadRequest, InvalidUsage
-from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 app = Flask('analytics-tracker')
 app.secret_key = os.urandom(24)
-app.config.from_object(Config)
+
+app.config.from_object('config.default')
+app.config.from_envvar('APP_CONFIG_FILE')
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
