@@ -3,7 +3,7 @@ from flask import Flask, Request
 from flask.json import jsonify
 from werkzeug.exceptions import BadRequest
 
-from app.libs.errors.common_errors import JSONLoadingBadRequest
+from app.libs.errors.common_errors import JSONLoadingBadRequest, InvalidUsage
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -25,14 +25,9 @@ def on_json_loading_failed(self, e):
     raise JSONLoadingBadRequest(e)
 
 
-@app.errorhandler(BadRequest)
+@app.errorhandler(InvalidUsage)
 def badrequest_handler(error):
-    response = jsonify({
-        'description': error.description,
-    })
-    response.status_code = error.code
-
-    return response
+    return error.to_response()
 
 
 Request.on_json_loading_failed = on_json_loading_failed

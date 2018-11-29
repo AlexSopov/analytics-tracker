@@ -1,2 +1,8 @@
+from flask import jsonify
+
+
 def no_content():
-    return 'OK', 204
+    response = jsonify(message='OK')
+    response.status_code = 204
+
+    return response
