@@ -18,7 +18,7 @@ dp:
 	@if ! [ -d $(VIRTUALENV_DIR) ]; \
 		then \
 	 	echo 'Creating virtual environment.'; \
-	  	python3 -m venv venv; \
+		virtualenv venv -p python3; \
 	fi
 
 	@echo "Installing packages."
