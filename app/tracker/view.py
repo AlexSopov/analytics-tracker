@@ -19,6 +19,6 @@ def track(project):
     :return: 204 - no content on success
     400 - On not valid request body or if project doesn't exist
     """
-    post_body = request.get_json()
+    post_body = request.get_json(force=True)
 
     return request_handler.handle(post_body, g.project)

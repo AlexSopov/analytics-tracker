@@ -20,7 +20,7 @@ def validate_track_schema(func):
 
     @functools.wraps(func)
     def wrapper_validate_track_schema(*args, **kwargs):
-        validate(schema, request.get_json())
+        validate(schema, request.get_json(force=True))
         return func(*args, **kwargs)
 
     return wrapper_validate_track_schema
