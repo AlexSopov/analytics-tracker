@@ -2,7 +2,6 @@ import pytest
 
 from app import db, app
 from app.tracker.models.data_models import EventBase, Project
-from test_config import TestConfig
 
 
 @pytest.fixture

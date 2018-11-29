@@ -71,3 +71,18 @@ def test_invalid_data_type_returns_1103(client):
 
     assert response.status_code == 400
     assert json_data.get('code') == ErrorCode.INVALID_PROPERTY_TYPE
+
+
+def test_not_supported_event_type_returns_(client):
+    response = client.post(
+        '/track/acme',
+        data=json.dumps(dict(
+            event='click',
+            data='100'
+        ))
+    )
+
+    json_data = response.get_json()
+
+    assert response.status_code == 400
+    assert json_data.get('code') == ErrorCode.INVALID_PROPERTY_TYPE
