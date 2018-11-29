@@ -1,5 +1,7 @@
 import os
 
+ENV = 'production'
+
 USER = os.environ.get('DB_USER')
 PASSWORD = os.environ.get('DB_PASSWORD')
 DB_NAME = os.environ.get('DB_NAME')
