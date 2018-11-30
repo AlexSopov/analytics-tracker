@@ -45,7 +45,9 @@ class PurchaseHandlerStrategy(HandlerStrategyBase):
     def handle(self, request_body, project):
         super().handle(request_body, project)
 
-        db.session.add(PurchaseEvent(project, self.get_data_attribute('customer_id')))
+        purchase_event = PurchaseEvent(project, self.get_data_attribute('customer_id'))
+
+        db.session.add(purchase_event)
         db.session.commit()
 
         return no_content()
